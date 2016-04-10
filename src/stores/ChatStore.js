@@ -16,6 +16,24 @@ class ChatStore {
 		};
 	}
 
+	@bind(Actions.messageReceived)
+	messageReceived(msg){
+		if(this.state.messages[msg.key]){
+			return ;
+		}
+
+		this.state.messages[msg.key] = msg;
+		this.setState({
+			messages: this.state.messages
+		});
+	}
+
+	@bind(Actions.sendMessage)
+	sendMessage(message){
+		this.state.message = message;
+		setTimeout(this.getInstance().sendMessage,10);
+	}
+
 	@bind(Actions.channelOpened)
 	channelOpened(selectedChannel){
 		_(this.state.channels)
@@ -32,7 +50,7 @@ class ChatStore {
 			channels: this.state.channels
 		});
 
-		setTimeout(this.getInstance().getMessages(),5000);
+		setTimeout(this.getInstance().getMessages,100);
 	}
 
 	@bind(Actions.messagesLoading)
@@ -76,7 +94,7 @@ class ChatStore {
 			selectedChannel
 		});
 
-		setTimeout(this.getInstance().getMessages(),100);
+		setTimeout(this.getInstance().getMessages,100);
 
 	}
 
