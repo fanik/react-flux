@@ -12,7 +12,11 @@ var {
 class Login extends React.Component {
 
 	onClick(){
-		Actions.login();
+		Actions.login(this.context.router);
+	}
+
+	static contextTypes = {
+		router: React.PropTypes.func.isRequired
 	}
 
 	render(){

@@ -17,7 +17,7 @@ class Actions {
 		);
 	}
 
-	login(args){
+	login(router){
 		return (dispatch) => {
 			var firebaseRef = new Firebase('https://react-stack-den.firebaseio.com/');
 			firebaseRef.authWithOAuthPopup('google', (error, user)=> {
@@ -25,6 +25,8 @@ class Actions {
 					return;
 				}
 				dispatch(user);
+
+				router.transitionTo('/chat');
 			});
 		}
 	}
